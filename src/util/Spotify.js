@@ -1,8 +1,8 @@
 const clientId = 'xxx'
 const redirectUri = 'http://localhost:3000/'
 const spotifyUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`
-let accessToken = undefined;
-let expiresIn = undefined;
+let accessToken = '';
+let expiresIn = '';
 
 let userToken = {}
 const Spotify = {
@@ -23,8 +23,9 @@ const Spotify = {
         }
     },
     search(term) {
-        const accessToken = Spotify.getAccessToken
-        fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,{
+        const accessToken = Spotify.getAccessToken()
+        
+        return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,{
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
@@ -61,7 +62,7 @@ const Spotify = {
         ).then(response => response.json()
         ).then(jsonResponse => {
             userId = jsonResponse.id;
-            return fetch(`https://api.spotify.com/v1/users/$userId}/playlists`, {
+            return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
                 headers: headers,
                 method: 'POST',
                 body: JSON.stringify({name : name})

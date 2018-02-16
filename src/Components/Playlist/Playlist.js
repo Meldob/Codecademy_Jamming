@@ -5,8 +5,8 @@ import TrackList from '../TrackList/TrackList';
 
 class Playlist extends React.Component {
   constructor(props) {
-    super(props),
-    this.onNameChange = this.onNameChange.bind(this);
+    super(props);
+    this.handleNameChange = this.handleNameChange.bind(this);
   }
 
   handleNameChange(event) {
@@ -22,7 +22,8 @@ class Playlist extends React.Component {
           />
         <TrackList 
           tracks = {this.props.tracks}
-          onRemove = {this.props.onRemove}/>
+          onRemove = {this.props.onRemove}
+          myprop = {this.props.myprop}/>
         <a className="Playlist-save"
           onClick = {this.props.onSave}
           >SAVE TO SPOTIFY</a>

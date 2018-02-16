@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import SearchBar from '../SearchBar/SearchBar'
-import SearchResults from '../SearchResults/SearchResults'
-import Playlist from '../Playlist/Playlist'
-import Spotify from '../../util/Spotify'
+import SearchBar from '../SearchBar/SearchBar';
+import SearchResults from '../SearchResults/SearchResults';
+import Playlist from '../Playlist/Playlist';
+import Spotify from '../../util/Spotify';
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       searchResults: [],
       playlistName: 'playlist',
@@ -41,7 +41,7 @@ class App extends React.Component {
   }
   search(term) {
     Spotify.search(term).then(searchResults => this.setState({
-      searchResults :searchResults
+      searchResults: searchResults
     }));
   }
   render() {
@@ -52,11 +52,12 @@ class App extends React.Component {
           <SearchBar
             onSearch = {this.search}/>
           <div className="App-playlist">
-            <SearchResults/>
+            <SearchResults
+              searchResults = {this.state.searchResults}
+              onAdd = {this.addTrack}/>
             <Playlist
               playlistName = {this.state.playlistName}
               tracks = {this.state.playlistTracks}
-              onAdd = {this.addTrack}
               onRemove = {this.removeTrack}
               onNameChange = {this.updatePlaylistName}
               onSave = {this.savePlaylist}/>
